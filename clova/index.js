@@ -63,9 +63,9 @@ class CEKRequest {
 
   launchRequest(cekResponse) {
     console.log('launchRequest')
-    cekResponse.setSimpleSpeechText('', 'en')
+    cekResponse.setSimpleSpeechText('次の札を読む場合は、次へ、同じ札を読む場合は、もう一度と言ってください。')
     cekResponse.setMultiturn({
-      intent: 'ThrowDiceIntent',
+      index: 0,
     })
   }
 
@@ -76,30 +76,15 @@ class CEKRequest {
     const slots = this.request.intent.slots
 
     switch (intent) {
-    case 'ThrowDiceIntent':
-      let diceCount = 1
-      if (!!slots) { 
-        const diceCountSlot = slots.diceCount 
-        if (slots.length != 0 && diceCountSlot) { 
-          diceCount = parseInt(diceCountSlot.value) 
-        } 
- 
-        if (isNaN(diceCount)) { 
-          diceCount = 1 
-        } 
-      } 
-      cekResponse.appendSpeechText(`サイコロを ${diceCount}個 投げます。`)
-      cekResponse.appendSpeechText({
-        lang: 'ja',
-        type: 'URL',
-        value: `${DOMAIN}/rolling_dice_sound.mp3`,
-      })
-      const throwResult = throwDice(diceCount)
-      cekResponse.appendSpeechText(resultText(throwResult))
+    case 'NextIntent':
+      cekResponse.appendSpeechText(`アイウエオ`)
+      break
+    case 'RepeatIntent':
+      cekResponse.appendSpeechText(`かきくけこ`)
       break
     case 'Clova.GuideIntent': 
     default: 
-      cekResponse.setSimpleSpeechText("サイコロを1個投げて、と言ってみてください。") 
+      cekResponse.setSimpleSpeechText("次の札を読む場合は、次へ、同じ札を読む場合は、もう一度と言ってください") 
     }
 
     if (this.session.new == false) {
@@ -109,7 +94,7 @@ class CEKRequest {
 
   sessionEndedRequest(cekResponse) {
     console.log('sessionEndedRequest')
-    cekResponse.setSimpleSpeechText('サイコロを終了します。')
+    cekResponse.setSimpleSpeechText('百人一首を終了します。')
     cekResponse.clearMultiturn()
   }
 }
