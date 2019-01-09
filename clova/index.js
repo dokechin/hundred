@@ -64,9 +64,6 @@ class CEKRequest {
   launchRequest(cekResponse) {
     console.log('launchRequest')
     cekResponse.setSimpleSpeechText('次の札を読む場合は、次へ、同じ札を読む場合は、もう一度と言ってください。')
-    cekResponse.setMultiturn({
-      index: 0,
-    })
   }
 
   intentRequest(cekResponse) {
@@ -87,8 +84,8 @@ class CEKRequest {
       cekResponse.setSimpleSpeechText("次の札を読む場合は、次へ、同じ札を読む場合は、もう一度と言ってください") 
     }
 
-    if (this.session.new == false) {
-      cekResponse.setMultiturn()
+    if (this.session.new == true) {
+      cekResponse.setMultiturn({id : 123})
     }
   }
 
