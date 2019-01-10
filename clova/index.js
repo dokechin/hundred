@@ -1,4 +1,4 @@
-import arrayShuffle from 'array-shuffle'
+const arrayShuffle = require('array-shuffle')
 const uuid = require('uuid').v4
 const _ = require('lodash')
 const { DOMAIN, ExtensionId, DEBUG } = require('../config')
