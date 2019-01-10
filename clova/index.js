@@ -161,6 +161,7 @@ class CEKRequest {
     case 'NextIntent':
       if (index >= 99){
         cekResponse.appendSpeechText(`もう読む札がありません`)
+        break
       } else {
         index++;
       }
