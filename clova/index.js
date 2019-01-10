@@ -164,10 +164,10 @@ class CEKRequest {
       } else {
         index++;
       }
-      cekResponse.appendSpeechText(FUDA[index])
+      cekResponse.appendSpeechText(FUDA[order[index]])
       break
     case 'RepeatIntent':
-      cekResponse.appendSpeechText(FUDA[index])
+      cekResponse.appendSpeechText(FUDA[order[index]])
       break
     case 'Clova.GuideIntent': 
     default: 
