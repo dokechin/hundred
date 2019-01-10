@@ -1,3 +1,4 @@
+import arrayShuffle from 'array-shuffle'
 const uuid = require('uuid').v4
 const _ = require('lodash')
 const { DOMAIN, ExtensionId, DEBUG } = require('../config')
@@ -150,7 +151,7 @@ class CEKRequest {
     var order = null
 
     if (this.session.new == true) {
-      order = arrayshuffle([...Array(100).keys()]);
+      order = arrayShuffle([...Array(100).keys()]);
     } else {
       order = this.session.sessionAttributes.order
       index = this.session.sessionAttributes.index
