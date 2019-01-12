@@ -155,7 +155,7 @@ class CEKRequest {
     if (this.session.sessionAttributes.order == null) {
       cekResponse.appendSpeechText(`それでは始めます`)
       order = [...Array(100).keys()];
-      index = 0
+      index = -1
 //      order = arrayShuffle([...Array(100).keys()]);
     } else {
       order = this.session.sessionAttributes.order
