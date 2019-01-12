@@ -184,7 +184,8 @@ class CEKRequest {
     }
     var value = {order : order, index : index}
     cekResponse.setMultiturn(value)
-    cache.set(this.session.user.userId​, value)
+    var key = this.session.user.userId
+    cache.set(key, value)
   }
 
   sessionEndedRequest(cekResponse) {
