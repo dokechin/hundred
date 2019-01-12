@@ -159,7 +159,7 @@ class CEKRequest {
 
     console.log(this.session.sessionAttributes.order)
     if (this.session.sessionAttributes.order == null) {
-      cekResponse.appendSpeechText(`それでは始めます`)
+      //cekResponse.appendSpeechText(`それでは始めます`)
       order = [...Array(100).keys()];
       index = -1
 //      order = arrayShuffle([...Array(100).keys()]);
