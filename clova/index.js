@@ -153,7 +153,8 @@ class CEKRequest {
 
     console.log(this.session.sessionAttributes.order)
     if (this.session.sessionAttributes.order == null) {
-      order = arrayShuffle([...Array(100).keys()]);
+      order = [...Array(100).keys()];
+//      order = arrayShuffle([...Array(100).keys()]);
     } else {
       order = this.session.sessionAttributes.order
       index = this.session.sessionAttributes.index
