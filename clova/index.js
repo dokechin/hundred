@@ -139,7 +139,7 @@ class CEKRequest {
 
   launchRequest(cekResponse) {
     console.log('launchRequest')
-    cekResponse.setSimpleSpeechText('次の札を読む場合は、次へ、同じ札を読む場合は、もう一度と言ってください。')
+    cekResponse.setSimpleSpeechText('次のフダを読む場合は、次へ、同じフダを読む場合は、もう一度と言ってください。')
     cekResponse.setMultiturn();
   }
 
