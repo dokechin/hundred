@@ -175,8 +175,6 @@ class CEKRequest {
       } else {
         index++;
       }
-      cekResponse.appendSpeechText(FUDA[order[index]])
-      break
     case 'RepeatIntent':
       cekResponse.appendSpeechText(FUDA[order[index]])
       break
@@ -184,8 +182,9 @@ class CEKRequest {
     default: 
       cekResponse.setSimpleSpeechText("次のフダを読む場合は、次へ、同じフダを読む場合は、もう一度と言ってください") 
     }
-    cekResponse.setMultiturn({order : order, index : index})
-    cache.set(this.session.user.userId​, {order : order, index : index})
+    var value = {order : order, index : index}
+    cekResponse.setMultiturn(value)
+    cache.set(this.session.user.userId​, value)
   }
 
   sessionEndedRequest(cekResponse) {
