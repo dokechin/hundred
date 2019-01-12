@@ -140,7 +140,7 @@ class CEKRequest {
   launchRequest(cekResponse) {
     console.log('launchRequest')
     cekResponse.setSimpleSpeechText('次のフダを読む場合は、次へ、同じフダを読む場合は、もう一度と言ってください。')
-    cekResponse.setMultiturn();
+    cekResponse.setMultiturn({order : null, index : -1});
   }
 
   intentRequest(cekResponse) {
@@ -148,12 +148,14 @@ class CEKRequest {
     console.dir(this.request)
     const intent = this.request.intent.name
     const slots = this.request.intent.slots
-    var index = 0
+    var index = null
     var order = null
 
     console.log(this.session.sessionAttributes.order)
     if (this.session.sessionAttributes.order == null) {
+      cekResponse.appendSpeechText(`それでは始めます`)
       order = [...Array(100).keys()];
+      index = 0
 //      order = arrayShuffle([...Array(100).keys()]);
     } else {
       order = this.session.sessionAttributes.order
