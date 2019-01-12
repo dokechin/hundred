@@ -4,11 +4,11 @@ const _ = require('lodash')
 const { DOMAIN, ExtensionId, DEBUG } = require('../config')
 var verifier = require('../util/verifier.js')
 var LRU = require('lru-cache')
-  , options = { max: 500
+const options = { max: 500
               , length: function (n, key) { return n * 2 + key.length }
               , dispose: function (key, n) { n.close() }
               , maxAge: 1000 * 60 * 60 }
-  , cache = new LRU(options)
+var cache = new LRU(options)
 
 const FUDA = 
   ['秋の田の　かりほの庵の　苫woarami　わが衣手は　つゆにぬれつつ',
@@ -145,7 +145,7 @@ class CEKRequest {
 
   launchRequest(cekResponse) {
     console.log('launchRequest')
-    var cached = cache.get(this.session.user.userId)​
+    var cached = cache.get(this.session.user.userId)
     if (cached != null) {
       cekResponse.setMultiturn({order : cached.order, index : cached.index});
     } else {
