@@ -3,6 +3,12 @@ const uuid = require('uuid').v4
 const _ = require('lodash')
 const { DOMAIN, ExtensionId, DEBUG } = require('../config')
 var verifier = require('../util/verifier.js')
+var LRU = require('lru-cache')
+  , options = { max: 500
+              , length: function (n, key) { return n * 2 + key.length }
+              , dispose: function (key, n) { n.close() }
+              , maxAge: 1000 * 60 * 60 }
+  , cache = new LRU(options)
 
 const FUDA = 
   ['秋の田の　かりほの庵の　苫woarami　わが衣手は　つゆにぬれつつ',
@@ -15,7 +21,7 @@ const FUDA =
   'わが庵は　みやこのたつみ　しかぞすむ　世をうぢヤマと　人はいふなり',
   '花の色は　うつりにけりな　いたづらに　わがよにふる　ながめせしまに',
   'これやこの　行くも帰るも　別れては　知るも知らぬも　逢坂の関',
-  'わたのはら　やそしまかけて　漕ぎいでぬと　人には告げよ　海人の釣舟', 
+  'わたのはら　やそしまかけて　漕ぎいでぬと　人には告げよ　あまの釣舟', 
   '天つ風　雲のかよいじ　吹きとじよ　をとめの姿　しばしとどめん',
   '筑波嶺の　峰より落つる　みなの川　恋ぞつもりて　淵となりぬる',
   '陸奥の　しのぶもぢずり　誰ゆゑに　乱れそめにし　われならなくに',
@@ -139,14 +145,14 @@ class CEKRequest {
 
   launchRequest(cekResponse) {
     console.log('launchRequest')
-    if (this.session.sessionAttributes.order != null) {
-      cekResponse.setMultiturn({order : this.session.sessionAttributes.order, index : this.session.sessionAttributes.index});
-      cekResponse.setSimpleSpeechText((index + 1) + 'まいめからの再開となります')
-      cekResponse.appendSpeechText(FUDA[order[index]])
+    var cached = cache.get(session.user.userId)​
+    if (cached != null) {
+      cekResponse.setMultiturn({order : cached.order, index : cached.index});
     } else {
-      cekResponse.setMultiturn({order : null, index : -1});
-      cekResponse.setSimpleSpeechText('次へ、または、もう一度と言ってください。')
-    }    
+      order = [...Array(100).keys()];
+      cekResponse.setMultiturn({order : order, index : 0});
+    }
+    cekResponse.appendSpeechText(FUDA[order[index]])
   }
 
   intentRequest(cekResponse) {
@@ -158,15 +164,8 @@ class CEKRequest {
     var order = null
 
     console.log(this.session.sessionAttributes.order)
-    if (this.session.sessionAttributes.order == null) {
-      //cekResponse.appendSpeechText(`それでは始めます`)
-      order = [...Array(100).keys()];
-      index = -1
-//      order = arrayShuffle([...Array(100).keys()]);
-    } else {
-      order = this.session.sessionAttributes.order
-      index = this.session.sessionAttributes.index
-    }
+    order = this.session.sessionAttributes.order
+    index = this.session.sessionAttributes.index
     
     switch (intent) {
     case 'NextIntent':
@@ -186,11 +185,12 @@ class CEKRequest {
       cekResponse.setSimpleSpeechText("次のフダを読む場合は、次へ、同じフダを読む場合は、もう一度と言ってください") 
     }
     cekResponse.setMultiturn({"order" : order, index : index})
+    cache.set(this.session.user.userId​, {"order" : order, "index" : index})
   }
 
   sessionEndedRequest(cekResponse) {
     console.log('sessionEndedRequest')
-    //cekResponse.clearMultiturn()
+    cekResponse.clearMultiturn()
   }
 }
 
