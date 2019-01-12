@@ -145,7 +145,7 @@ class CEKRequest {
       cekResponse.appendSpeechText(FUDA[order[index]])
     } else {
       cekResponse.setMultiturn({order : null, index : -1});
-//      cekResponse.setSimpleSpeechText('次のフダへ進む場合は、次へ、繰り返す場合は、もう一度と言ってください。')
+      cekResponse.setSimpleSpeechText('次へ、または、もう一度と言ってください。')
     }    
   }
 
