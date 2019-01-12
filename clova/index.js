@@ -5,7 +5,7 @@ const { DOMAIN, ExtensionId, DEBUG } = require('../config')
 var verifier = require('../util/verifier.js')
 
 const FUDA = 
-  ['秋の田の　かりほの庵の　苫をarami　わが衣手は　つゆにぬれつつ',
+  ['秋の田の　かりほの庵の　苫woarami　わが衣手は　つゆにぬれつつ',
   '春すぎて　夏きにけらし　白妙の　衣ほすちょう　あまのカグヤマ',
   'あしびきの　山鳥の尾の　しだり尾の　ながながし夜を　ひとりかもねむ',
   '田子の浦に　うちでてみれば　白妙の　富士の高嶺に　雪はふりつつ',
@@ -145,7 +145,7 @@ class CEKRequest {
       cekResponse.appendSpeechText(FUDA[order[index]])
     } else {
       cekResponse.setMultiturn({order : null, index : -1});
-      cekResponse.setSimpleSpeechText('次のフダへ進む場合は、次へ、繰り返す場合は、もう一度と言ってください。')
+//      cekResponse.setSimpleSpeechText('次のフダへ進む場合は、次へ、繰り返す場合は、もう一度と言ってください。')
     }    
   }
 
