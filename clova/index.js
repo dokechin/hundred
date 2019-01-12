@@ -141,7 +141,7 @@ class CEKRequest {
     console.log('launchRequest')
     if (this.session.sessionAttributes.order != null) {
       cekResponse.setMultiturn({order : this.session.sessionAttributes.order, index : this.session.sessionAttributes.index});
-      cekResponse.setSimpleSpeechText((index + 1) + 'まいめからの再開。')
+      cekResponse.setSimpleSpeechText((index + 1) + 'まいめからの再開となります')
       cekResponse.appendSpeechText(FUDA[order[index]])
     } else {
       cekResponse.setMultiturn({order : null, index : -1});
@@ -190,7 +190,7 @@ class CEKRequest {
 
   sessionEndedRequest(cekResponse) {
     console.log('sessionEndedRequest')
-    cekResponse.clearMultiturn()
+    //cekResponse.clearMultiturn()
   }
 }
 
