@@ -145,7 +145,7 @@ class CEKRequest {
 
   launchRequest(cekResponse) {
     console.log('launchRequest')
-    var cached = cache.get(session.user.userId)​
+    var cached = cache.get(this.session.user.userId)​
     if (cached != null) {
       cekResponse.setMultiturn({order : cached.order, index : cached.index});
     } else {
