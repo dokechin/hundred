@@ -5,7 +5,7 @@ const { DOMAIN, ExtensionId, DEBUG } = require('../config')
 var verifier = require('../util/verifier.js')
 
 const FUDA = 
-  ['秋の田の　かりほの庵の　苫を あrami　わが衣手は　つゆにぬれつつ',
+  ['秋の田の　かりほの庵の　苫をarami　わが衣手は　つゆにぬれつつ',
   '春すぎて　夏きにけらし　白妙の　衣ほすちょう　あまのカグヤマ',
   'あしびきの　山鳥の尾の　しだり尾の　ながながし夜を　ひとりかもねむ',
   '田子の浦に　うちでてみれば　白妙の　富士の高嶺に　雪はふりつつ',
