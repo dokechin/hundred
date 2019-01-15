@@ -170,7 +170,8 @@ class CEKRequest {
     switch (intent) {
     case 'NextIntent':
       if (index >= 99){
-        cekResponse.appendSpeechText(`もう読む札がありません`)
+        cekResponse.appendSpeechText(`最後まで読み終わりました`)
+        cekResponse.appendSpeechText(`もう一度プレーする場合は、リプレイといってください`)
         break
       } else {
         index++;
@@ -178,6 +179,10 @@ class CEKRequest {
     case 'RepeatIntent':
       cekResponse.appendSpeechText(FUDA[order[index]])
       break
+    case 'ReplayIntent': 
+      cekResponse.appendSpeechText(`リプレイを受け付けました`)
+      order = [...Array(100).keys()];
+      index = 0;
     case 'Clova.GuideIntent': 
     default: 
       cekResponse.setSimpleSpeechText("次のフダを読む場合は、次へ、同じフダを読む場合は、もう一度と言ってください") 
