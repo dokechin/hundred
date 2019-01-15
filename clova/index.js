@@ -138,6 +138,8 @@ class CEKRequest {
         return this.launchRequest(cekResponse)
       case 'IntentRequest':
         return this.intentRequest(cekResponse)
+      case 'ReplayRequest':
+        return this.intentRequest(cekResponse)
       case 'SessionEndedRequest':
         return this.sessionEndedRequest(cekResponse)
     }
