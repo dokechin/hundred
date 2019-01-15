@@ -185,6 +185,7 @@ class CEKRequest {
       cekResponse.appendSpeechText(`リプレイを受け付けました`)
       order = [...Array(100).keys()];
       index = 0;
+      break;
     case 'Clova.GuideIntent': 
     default: 
       cekResponse.setSimpleSpeechText("次のフダを読む場合は、次へ、同じフダを読む場合は、もう一度と言ってください") 
