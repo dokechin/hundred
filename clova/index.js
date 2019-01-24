@@ -194,8 +194,8 @@ class CEKRequest {
     default: 
       cekResponse.setSimpleSpeechText("次のフダを読む場合は、次へ、同じフダを読む場合は、もう一度と言ってください") 
     }
-    var key = this.session.user.userId
-    cache.set(key, {order : order,index : index})
+    cached = {order : order,index : index}
+    cache.set(this.session.user.userId, cached)
   }
 
   sessionEndedRequest(cekResponse) {
