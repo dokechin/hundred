@@ -151,9 +151,9 @@ class CEKRequest {
     if (cached != null) {
       cekResponse.setMultiturn({order : cached.order, index : cached.index});
     } else {
-      order = [...Array(100).keys()];
-      cekResponse.setMultiturn({order : order, index : 0});
+      cached = { order : [...Array(100).keys()], index : 0};
     }
+    cache.set(this.session.user.userId, cached)
     cekResponse.appendSpeechText(FUDA[order[index]])
   }
 
@@ -166,34 +166,36 @@ class CEKRequest {
     var order = null
 
     console.log(this.session.sessionAttributes.order)
-    order = this.session.sessionAttributes.order
-    index = this.session.sessionAttributes.index
-    
+
+    var cached = cache.get(this.session.user.userId)
+    if (cached != null) {
+      index = cached.index
+      order = cached.order  
+    } else {
+      order = [...Array(100).keys()]
+      index = 0
+    }
+
     switch (intent) {
     case 'NextIntent':
       if (index >= 99){
-        cekResponse.appendSpeechText(`最後まで読み終わりました`)
-        cekResponse.appendSpeechText(`もう一度プレーする場合は、リプレイといってください`)
+        cekResponse.appendSpeechText(`最後まで読み終わりました。もう一度プレーする場合は、リプレイといってください`)
         break
       } else {
         index++;
-      }
+      }  
+    case 'ReplayIntent': 
+      order = [...Array(100).keys()];
+      index = 0;
     case 'RepeatIntent':
       cekResponse.appendSpeechText(FUDA[order[index]])
       break
-    case 'ReplayIntent': 
-      cekResponse.appendSpeechText(`リプレイを受け付けました`)
-      order = [...Array(100).keys()];
-      index = 0;
-      break;
     case 'Clova.GuideIntent': 
     default: 
       cekResponse.setSimpleSpeechText("次のフダを読む場合は、次へ、同じフダを読む場合は、もう一度と言ってください") 
     }
-    var value = {order : order, index : index}
-    cekResponse.setMultiturn(value)
     var key = this.session.user.userId
-    cache.set(key, value)
+    cache.set(key, {order : order,index : index})
   }
 
   sessionEndedRequest(cekResponse) {
