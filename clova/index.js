@@ -150,6 +150,7 @@ class CEKRequest {
       cached = { order : [...Array(100).keys()], index : 0};
       cache.set(this.session.user.userId, cached)
     }
+    cekResponse.setMultiturn({mode : 'play'});
     cekResponse.appendSpeechText(FUDA[cached.order[cached.index]])
   }
 
@@ -194,6 +195,8 @@ class CEKRequest {
     }
     cached = {order : order,index : index}
     cache.set(this.session.user.userId, cached)
+    cekResponse.setMultiturn({mode : 'play'});
+
   }
 
   sessionEndedRequest(cekResponse) {
