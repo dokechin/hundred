@@ -4,9 +4,7 @@ const _ = require('lodash')
 const { DOMAIN, ExtensionId, DEBUG } = require('../config')
 var verifier = require('../util/verifier.js')
 var LRU = require('lru-cache')
-const options = { max: 500
-              , length: function (n, key) { return n * 2 + key.length }
-              , dispose: function (key, n) { n.close() }
+const options = { max: 5000
               , maxAge: 1000 * 60 * 60 }
 var cache = new LRU(options)
 
