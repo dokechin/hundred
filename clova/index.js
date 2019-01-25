@@ -146,10 +146,10 @@ class CEKRequest {
   launchRequest(cekResponse) {
     console.log('launchRequest')
     var cached = cache.get(this.session.user.userId)
-    if (cached != null) {
-      cekResponse.setMultiturn({order : cached.order, index : cached.index});
-    } else {
+    if (typeof cached === 'undefined') {
       cached = { order : [...Array(100).keys()], index : 0};
+    } else {
+      cekResponse.setMultiturn({order : cached.order, index : cached.index});
     }
     cache.set(this.session.user.userId, cached)
     cekResponse.appendSpeechText(FUDA[order[index]])
@@ -180,9 +180,13 @@ class CEKRequest {
       } else {
         index++;
       }  
+      cekResponse.appendSpeechText(FUDA[order[index]])
+      break;
     case 'ReplayIntent': 
       order = [...Array(100).keys()];
       index = 0;
+      cekResponse.appendSpeechText(FUDA[order[index]])
+      break;
     case 'RepeatIntent':
       cekResponse.appendSpeechText(FUDA[order[index]])
       break
