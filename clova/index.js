@@ -165,15 +165,13 @@ class CEKRequest {
     var index = null
     var order = null
 
-    console.log(this.session.sessionAttributes.order)
-
     var cached = cache.get(this.session.user.userId)
-    if (cached != null) {
-      index = cached.index
-      order = cached.order  
-    } else {
+    if (typeof cached === 'undefined') {
       order = [...Array(100).keys()]
       index = 0
+    } else {
+      index = cached.index
+      order = cached.order  
     }
 
     switch (intent) {
