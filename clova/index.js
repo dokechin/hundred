@@ -135,8 +135,6 @@ class CEKRequest {
         return this.launchRequest(cekResponse)
       case 'IntentRequest':
         return this.intentRequest(cekResponse)
-      case 'ReplayRequest':
-        return this.intentRequest(cekResponse)
       case 'SessionEndedRequest':
         return this.sessionEndedRequest(cekResponse)
     }
@@ -171,6 +169,9 @@ class CEKRequest {
     }
 
     switch (intent) {
+    case 'PinpointIntent':
+      cekResponse.appendSpeechText(FUDA[slots.index.value-1])
+      break;
     case 'NextIntent':
       if (index >= 99){
         cekResponse.appendSpeechText(`最後まで読み終わりました。もう一度プレーする場合は、リプレイといってください`)
