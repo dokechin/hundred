@@ -10,7 +10,7 @@ var cache = new LRU(options)
 const FUDA = 
   ['秋の田の　かりほの庵の　苫woarami　わが衣手は　つゆにぬれつつ',
   '春すぎて　夏きにけらし　白妙の。衣hosu蝶　あまのカグヤマ',
-  'あしびきの　山鳥の尾の　しだり尾の　ながながし夜を　ひとりかもねむ',
+  'あしびきの　山鳥の尾の　しだり尾の　ながながしよを　ひとりかもねむ',
   '田子の浦に　うちでてみれば　白妙の　富士の高嶺に　雪はふりつつ',
   '奥山に　もみじ踏みわけ　鳴く鹿の　声きく時ぞ　秋は悲しき',
   'かささぎの　渡せる橋に　おく霜の　白きをみれば　よぞふけにける',
@@ -170,7 +170,8 @@ class CEKRequest {
 
     switch (intent) {
     case 'PinpointIntent':
-      cekResponse.appendSpeechText(FUDA[slots.index.value-1])
+      index = slots.index.value - 1 
+      cekResponse.appendSpeechText(FUDA[index])
       break;
     case 'NextIntent':
       if (index >= 99){
