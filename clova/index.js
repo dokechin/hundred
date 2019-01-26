@@ -4,13 +4,12 @@ const _ = require('lodash')
 const { DOMAIN, ExtensionId, DEBUG } = require('../config')
 var verifier = require('../util/verifier.js')
 var LRU = require('lru-cache')
-const options = { max: 5000
-              , maxAge: 1000 * 60 * 60 }
+const options = { max: 5000, maxAge: 1000 * 60 * 60 }
 var cache = new LRU(options)
 
 const FUDA = 
   ['秋の田の　かりほの庵の　苫woarami　わが衣手は　つゆにぬれつつ',
-  '春すぎて　夏きにけらし　白妙の。衣hosucyou　あまのカグヤマ',
+  '春すぎて　夏きにけらし　白妙の。衣hosucho-　あまのカグヤマ',
   'あしびきの　山鳥の尾の　しだり尾の　ながながし夜を　ひとりかもねむ',
   '田子の浦に　うちでてみれば　白妙の　富士の高嶺に　雪はふりつつ',
   '奥山に　もみじ踏みわけ　鳴く鹿の　声きく時ぞ　秋は悲しき',
