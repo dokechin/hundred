@@ -146,6 +146,7 @@ class CEKRequest {
     if (typeof cached === 'undefined') {
       cached = { order : [...Array(100).keys()], index : 0};
       cache.set(this.session.user.userId, cached)
+      cekResponse.appendSpeechText("次、または、もう一度といひたまへ。")
     }
     cekResponse.setMultiturn({mode : 'play'});
     cekResponse.appendSpeechText(FUDA[cached.order[cached.index]])
@@ -175,7 +176,7 @@ class CEKRequest {
       break;
     case 'NextIntent':
       if (index >= 99){
-        cekResponse.appendSpeechText(`最後まで読み終わりました。もう一度プレーする場合は、リプレイといってください`)
+        cekResponse.appendSpeechText(`もう一度プレーする場合は、リプレイといひたまへ`)
         break
       } else {
         index++;
@@ -192,7 +193,7 @@ class CEKRequest {
       break
     case 'Clova.GuideIntent': 
     default: 
-      cekResponse.setSimpleSpeechText("次のフダを読む場合は、次へ、同じフダを読む場合は、もう一度と言ってください") 
+      cekResponse.setSimpleSpeechText("次、または、もう一度といひたまへ。") 
     }
     cached = {order : order,index : index}
     cache.set(this.session.user.userId, cached)
