@@ -146,7 +146,7 @@ class CEKRequest {
     if (typeof cached === 'undefined') {
       cached = { order : arrayShuffle([...Array(100).keys()]), index : 0};
       cache.set(this.session.user.userId, cached)
-      cekResponse.appendSpeechText("百人一首を始めるよ。読んだ後に、次、または、もう一度といってね。")
+      cekResponse.appendSpeechText("百人一首を始めるよ。読んだ後に、次、または、もう一度といってね。。。。")
     }
     cekResponse.setMultiturn({mode : 'play'});
     cekResponse.appendSpeechText(FUDA[cached.order[cached.index]])
@@ -184,7 +184,7 @@ class CEKRequest {
       cekResponse.appendSpeechText(FUDA[order[index]])
       break;
     case 'ReplayIntent': 
-      cekResponse.appendSpeechText("百人一首を始めるよ。読んだ後に、次、または、もう一度といってね。")
+      cekResponse.appendSpeechText("百人一首を始めるよ。読んだ後に、次、または、もう一度といってね。。。。")
       order = arrayShuffle([...Array(100).keys()]);
       index = 0;
       cekResponse.appendSpeechText(FUDA[order[index]])
