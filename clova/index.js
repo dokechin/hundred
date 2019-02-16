@@ -146,6 +146,11 @@ class CEKRequest {
     if (typeof cached === 'undefined') {
       cached = { order : arrayShuffle([...Array(100).keys()]), index : 0};
       cache.set(this.session.user.userId, cached)
+      cekResponse.appendSpeechText({
+        lang: 'ja',
+        type: 'URL',
+        value: `${DOMAIN}/koto_01.mp3`,
+      })
       cekResponse.appendSpeechText("百人一首を始めるよ。読んだ後に、次、または、もう一度といってね")
       cekResponse.appendSpeechText({
         lang: 'ja',
