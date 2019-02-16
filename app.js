@@ -11,6 +11,7 @@ const app = express();
 app.use(bodyParser.json())
 app.use(morgan('common'));
 app.use((err, req, res, next) => next());
+app.use(express.static('public'))
 
 app.use('/', routes);
 
