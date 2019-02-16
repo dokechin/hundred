@@ -151,7 +151,7 @@ class CEKRequest {
         type: 'URL',
         value: `${DOMAIN}/koto_01.mp3`,
       })
-      cekResponse.appendSpeechText("百人一首を始めるよ。読んだ後に、次、または、もう一度といってね")
+      cekResponse.appendSpeechText("百人一首をはじむる。読みし後に、次、または、もう一度といいたまえ")
       cekResponse.appendSpeechText({
         lang: 'ja',
         type: 'URL',
@@ -186,7 +186,7 @@ class CEKRequest {
       break;
     case 'NextIntent':
       if (index >= 99){
-        cekResponse.appendSpeechText(`もう一度プレーする場合は、リプレイといってね`)
+        cekResponse.appendSpeechText(`もう一度するときは、リプレイといいたまえ`)
         break
       } else {
         index++;
@@ -194,7 +194,7 @@ class CEKRequest {
       cekResponse.appendSpeechText(FUDA[order[index]])
       break;
     case 'ReplayIntent': 
-      cekResponse.appendSpeechText("百人一首を始めるよ。読んだ後に、次、または、もう一度といってね")
+      cekResponse.appendSpeechText("百人一首をはじむる。読みし後に、次、または、もう一度といいたまえ")
       cekResponse.appendSpeechText({
         lang: 'ja',
         type: 'URL',
@@ -209,7 +209,7 @@ class CEKRequest {
       break
     case 'Clova.GuideIntent': 
     default: 
-      cekResponse.setSimpleSpeechText("次、または、もう一度といってね") 
+      cekResponse.setSimpleSpeechText("次、または、もう一度といいたまえ") 
     }
     cached = {order : order,index : index}
     cache.set(this.session.user.userId, cached)
