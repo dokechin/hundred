@@ -152,7 +152,8 @@ class CEKRequest {
         type: 'URL',
         value: `${DOMAIN}/koto_01.mp3`,
       })
-      cekResponse.appendSpeechText("百人一首をはじむる。読みしあとに、次、または、もう一度といいたまえ")
+      cekResponse.appendSpeechText("百人一首をはじむる。読みしあとに、次、または、もう一度といいたまえ。")
+      cekResponse.appendSpeechText("。")
       cekResponse.appendSpeechText(FUDA[cached.order[cached.index]][0])
       cekResponse.appendSpeechText(FUDA[cached.order[cached.index]][1])
     } else {
