@@ -191,6 +191,11 @@ class CEKRequest {
       break;
     case 'NextIntent':
       if (index >= 99){
+        cekResponse.appendSpeechText({
+          lang: 'ja',
+          type: 'URL',
+          value: `${DOMAIN}/koto_02.mp3`,
+        })
         cekResponse.appendSpeechText(`もう一度するときは、リプレイといいたまえ`)
         break
       } else {
