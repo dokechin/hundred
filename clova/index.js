@@ -205,14 +205,9 @@ class CEKRequest {
       cekResponse.appendSpeechText(FUDA[order[index]][1])
       break;
     case 'ReplayIntent': 
-      cekResponse.appendSpeechText("百人一首をはじむる。読みしあとに、次、または、もう一度といいたまえ")
-      cekResponse.appendSpeechText({
-        lang: 'ja',
-        type: 'URL',
-        value: `${DOMAIN}/mute_01sec.wav`,
-      })
       order = arrayShuffle([...Array(100).keys()]);
       index = 0;
+      cekResponse.appendSpeechText("百人一首をはじむる。読みしあとに、次、または、もう一度といいたまえ")
       cekResponse.appendSpeechText({
         lang: 'ja',
         type: 'URL',
@@ -222,9 +217,9 @@ class CEKRequest {
       cekResponse.appendSpeechText(FUDA[order[index]][1])
       break;
     case 'RepeatIntent':
-    cekResponse.appendSpeechText(FUDA[order[index]][0])
-    cekResponse.appendSpeechText(FUDA[order[index]][1])
-    break
+      cekResponse.appendSpeechText(FUDA[order[index]][0])
+      cekResponse.appendSpeechText(FUDA[order[index]][1])
+      break
     case 'Clova.GuideIntent': 
     default: 
       cekResponse.setSimpleSpeechText("次、または、もう一度といいたまえ") 
