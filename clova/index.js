@@ -144,9 +144,8 @@ class CEKRequest {
   launchRequest(cekResponse) {
     console.log('launchRequest')
     var cached = cache.get(this.session.user.userId)
-    if (typeof cached === 'undefined') {
-      cached = { order : arrayShuffle([...Array(100).keys()]), index : 0};
-      cache.set(this.session.user.userId, cached)
+
+    if (typeof cached === 'undefined' || cached.index == 0) {
       cekResponse.appendSpeechText({
         lang: 'ja',
         type: 'URL',
@@ -158,11 +157,18 @@ class CEKRequest {
         type: 'URL',
         value: `${DOMAIN}/mute_01sec.mp3`,
       })
+    }
+    if (typeof cached === 'undefined' ) {
+      cached = { order : arrayShuffle([...Array(100).keys()]), index : 0};
       cekResponse.appendSpeechText(FUDA[cached.order[cached.index]][0])
       cekResponse.appendSpeechText(FUDA[cached.order[cached.index]][1])
     } else {
+      if (cached.index == 0) {
+        cekResponse.appendSpeechText(FUDA[cached.order[cached.index]][0])
+      }
       cekResponse.appendSpeechText(FUDA[cached.order[cached.index]][1])
     }
+    cache.set(this.session.user.userId, cached)
     cekResponse.setMultiturn({mode : 'play'});
   }
 
